@@ -37,8 +37,8 @@ export const sendCartData = (cart) => {
               method: "PUT",
               body: JSON.stringify(cart)
             });
-            //const data = await res.json();
-            
+            const data = await res.json();
+            console.log(data);
             dispatch(uiActions.showNotification({
               open:true,
               message:"Send Request to Database successfully.",
