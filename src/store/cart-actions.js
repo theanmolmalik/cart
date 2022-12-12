@@ -10,6 +10,7 @@ export const fetchData = () => {
         }
         try{
             const cartData = await fetchHandler();
+            console.log(cartData);
             dispatch(cartActions.replaceData(cartData));
         }catch(err){
             dispatch(uiActions.showNotification({
@@ -36,8 +37,8 @@ export const sendCartData = (cart) => {
               method: "PUT",
               body: JSON.stringify(cart)
             });
-            const data = await res.json();
-            console.log(data);
+            //const data = await res.json();
+            
             dispatch(uiActions.showNotification({
               open:true,
               message:"Send Request to Database successfully.",

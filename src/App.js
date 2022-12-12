@@ -18,15 +18,13 @@ function App() {
   },[dispatch]);
   
   useEffect(()=>{
-    if(isFirstRender)
-    {
+    if(isFirstRender){
       isFirstRender=false;
       return;
     }
-    if(cart.changed)
-    {
+    //if(cart.changed){
       dispatch(sendCartData(cart));
-    }
+    //}
   },[cart,dispatch])
   return (
     <div className="App">

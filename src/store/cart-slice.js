@@ -3,7 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
     name: "cart",
     initialState: {
-        itemsList: [],
+        itemsList: [
+            {
+                id: 1,
+                price: 25,
+                quantity: 1,
+                totalPrice: 25,
+                name: "Macbook",
+            },
+        ],
         totalQuantity: 0,
         showCart: false,
         changed:false,
@@ -14,16 +22,17 @@ const cartSlice = createSlice({
             state.itemsList = action.payload.itemsList;
         },
         addToCart(state,action){
-            state.changes = true;
+            state.changed = true;
             const newItem = action.payload;
-            const existingItem = state.itemsList.find((item)=>item.id===newItem.id);
+            const existingItem = state.itemsList.find(
+                (item)=>item.id===newItem.id
+            );
 
             if(existingItem){
                 existingItem.quantity++;
                 existingItem.totalPrice +=newItem.price;
             }
             else{
-                state.totalQuantity++;
                 state.itemsList.push({
                     id: newItem.id,
                     price: newItem.price,
@@ -31,6 +40,7 @@ const cartSlice = createSlice({
                     totalPrice: newItem.price,
                     name:newItem.name,
                 })
+                state.totalQuantity++;
             }
             
         },
@@ -38,13 +48,10 @@ const cartSlice = createSlice({
             state.changed = true;
             const id = action.payload;
             const existingItem = state.itemsList.find(item =>item.id===id);
-            if(existingItem.quantity===1)
-            {
+            if(existingItem.quantity===1){
                 state.itemsList = state.itemsList.filter(item=>item.id!==id);
                 existingItem.totalQuantity--;
-            }
-            else
-            {
+            }else{
                 existingItem.quantity--;
                 existingItem.totalPrice -= existingItem.price;
             }
@@ -52,7 +59,7 @@ const cartSlice = createSlice({
         setShowCart(state){
             state.showCart = !state.showCart;
         },
-    }
+    },
 });
 
 export const cartActions = cartSlice.actions;

@@ -4,7 +4,7 @@ import "./Cart.css";
 import { useSelector } from "react-redux";
 const CartItems = () => {
   const cartItems=useSelector(state=>state.cart.itemsList);
-  let isCartEmpty = !(typeof cartItems !== 'undefined' && cartItems.length === 0);
+  let isCartEmpty = (typeof cartItems !== 'undefined' && cartItems.length === 0);
   return (
     <div className="cart-container">
       <h2>Your Cart</h2>
